@@ -84,7 +84,7 @@ impl BinaryFuse16 {
     /// Note: the iterator will be iterated over multiple times while building
     /// the filter. If using a hash function to map the key, it may be cheaper
     /// just to create a scratch array of hashed keys that you pass in.
-    fn try_from_iterator<T>(keys: T) -> Result<Self, &'static str>
+    pub fn try_from_iterator<T>(keys: T) -> Result<Self, &'static str>
     where
         T: ExactSizeIterator<Item = u64> + Clone,
     {
@@ -96,7 +96,7 @@ impl TryFrom<&[u64]> for BinaryFuse16 {
     type Error = &'static str;
 
     fn try_from(keys: &[u64]) -> Result<Self, Self::Error> {
-        Self::try_from_iterator(keys.iter().map(|k| *k))
+        Self::try_from_iterator(keys.iter().copied())
     }
 }
 
@@ -104,7 +104,7 @@ impl TryFrom<&Vec<u64>> for BinaryFuse16 {
     type Error = &'static str;
 
     fn try_from(v: &Vec<u64>) -> Result<Self, Self::Error> {
-        Self::try_from_iterator(v.iter().map(|k| *k))
+        Self::try_from_iterator(v.iter().copied())
     }
 }
 
@@ -112,7 +112,7 @@ impl TryFrom<Vec<u64>> for BinaryFuse16 {
     type Error = &'static str;
 
     fn try_from(v: Vec<u64>) -> Result<Self, Self::Error> {
-        Self::try_from_iterator(v.iter().map(|k| *k))
+        Self::try_from_iterator(v.iter().copied())
     }
 }
 

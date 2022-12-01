@@ -96,7 +96,7 @@ impl TryFrom<&[u64]> for BinaryFuse8 {
     type Error = &'static str;
 
     fn try_from(keys: &[u64]) -> Result<Self, Self::Error> {
-        Self::try_from_iterator(keys.iter().map(|k| *k))
+        Self::try_from_iterator(keys.iter().copied())
     }
 }
 
@@ -104,7 +104,7 @@ impl TryFrom<&Vec<u64>> for BinaryFuse8 {
     type Error = &'static str;
 
     fn try_from(v: &Vec<u64>) -> Result<Self, Self::Error> {
-        Self::try_from_iterator(v.iter().map(|k| *k))
+        Self::try_from_iterator(v.iter().copied())
     }
 }
 
@@ -112,7 +112,7 @@ impl TryFrom<Vec<u64>> for BinaryFuse8 {
     type Error = &'static str;
 
     fn try_from(v: Vec<u64>) -> Result<Self, Self::Error> {
-        Self::try_from_iterator(v.iter().map(|k| *k))
+        Self::try_from_iterator(v.iter().copied())
     }
 }
 

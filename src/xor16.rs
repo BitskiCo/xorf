@@ -86,19 +86,19 @@ impl Xor16 {
 
 impl From<&[u64]> for Xor16 {
     fn from(keys: &[u64]) -> Self {
-        Self::from_iterator(keys.iter().map(|k| *k))
+        Self::from_iterator(keys.iter().copied())
     }
 }
 
 impl From<&Vec<u64>> for Xor16 {
     fn from(v: &Vec<u64>) -> Self {
-        Self::from_iterator(v.iter().map(|k| *k))
+        Self::from_iterator(v.iter().copied())
     }
 }
 
 impl From<Vec<u64>> for Xor16 {
     fn from(v: Vec<u64>) -> Self {
-        Self::from_iterator(v.iter().map(|k| *k))
+        Self::from_iterator(v.iter().copied())
     }
 }
 
